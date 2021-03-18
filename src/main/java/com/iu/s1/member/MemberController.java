@@ -25,7 +25,7 @@ public class MemberController {
 	
 	//memberLogin2 print 들어온 것 만 확인
 	@RequestMapping(value ="/member/memberLogin", method = RequestMethod.POST)
-    public void memberLogin2(HttpServletRequest Request) throws Exception {
+    public void memberLogin2(MemberDTO memberDTO) throws Exception {
 		String id = Request.getParameter("id");
 		String pw = Request.getParameter("pw");
 		
