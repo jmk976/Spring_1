@@ -23,21 +23,43 @@ public class MemberController {
 		return "member/memberLogin";
 	}
 	
-	//memberLogin2 print 들어온 것 만 확인
-	@RequestMapping(value ="/member/memberLogin", method = RequestMethod.POST)
-    public void memberLogin2(MemberDTO memberDTO) throws Exception {
-		String id = Request.getParameter("id");
-		String pw = Request.getParameter("pw");
+	// memberJoin2 //	/member/memberJoin POST
+		@RequestMapping(value = "/member/memberJoin", method = RequestMethod.POST)
+		public void memberJoin2(MemberDTO memberDTO)throws Exception{
+			
+			int result = memberService.memberJoin(memberDTO);
+			
+			System.out.println(result);
+		}
 		
 		
-		MemberDTO memberDTO = new MemberDTO();
-		memberDTO.setId(id);
-		memberDTO.setPw(pw);
 		
-		memberService.memberLogin(memberDTO);
 		
-		System.out.println(memberDTO);
+		//memberLogin print   //  /member/memberLogin
+		@RequestMapping(value = "/member/memberLogin")
+		public String memberLogin() {
+			//String name = request.getParameter("name");
+			//int age = Integer.parseInt(request.getParameter("age"));
+			//System.out.println(name);
+			//System.out.println(age);
+			System.out.println("login-------");
+			// /WEB-INF/views/member/memberLogin.jsp
+			return "member/memberLogin";
+		}
 		
-    }
+		//memberLogin2 print
+		@RequestMapping(value = "/member/memberLogin", method = RequestMethod.POST)
+		public void memberLogin2(HttpServletRequest request) throws Exception {
+			String id = request.getParameter("id");
+			String pw = request.getParameter("pw");
+			
+			MemberDTO memberDTO = new MemberDTO();
+			memberDTO.setId(id);
+			memberDTO.setPw(pw);
+			memberDTO = memberService.memberLogin(memberDTO);
+			
+			System.out.println(memberDTO);
+			
+		}
 
-}
+	}
