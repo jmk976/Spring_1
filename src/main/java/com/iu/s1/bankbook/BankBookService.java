@@ -11,6 +11,11 @@ public class BankBookService {
 	@Autowired
 	private BankBookDAO bankBookDAO;
 	
+	
+	public int setWrite(BankBookDTO bankBookDTO) throws Exception {
+		return bankBookDAO.setWrite(bankBookDTO);
+	}
+	
 	public BankBookDTO getSelect (BankBookDTO bankBookDTO) throws Exception{
 		return bankBookDAO.getSelect(bankBookDTO);
 	}

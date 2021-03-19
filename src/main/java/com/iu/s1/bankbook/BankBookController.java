@@ -28,6 +28,8 @@ public class BankBookController {
   //상품 상세 정보 출력
   	@RequestMapping(value= "/bankbook/bankbookSelect")
     	public ModelAndView bankbookSelect (BankBookDTO bankBookDTO, ModelAndView modelAndView) throws Exception{
+  		System.out.println("NUM:"+ bankBookDTO.getBooknumber());
+  		
   		bankBookDTO = bankbookService.getSelect(bankBookDTO);
   		
   		modelAndView.addObject("dto", bankBookDTO);
@@ -47,13 +49,16 @@ public class BankBookController {
 	
 	@RequestMapping(value ="/bankbook/bankbookAdd", method = RequestMethod.POST)
     public ModelAndView bankbookAdd(BankBookDTO bankBookDTO, ModelAndView modelAndView)throws Exception{
-		modelAndView.setViewName("");
+	    
+		int result = bankbookService.setWrite(bankBookDTO);
+		System.out.println(result);
+		modelAndView.addObject("dto", bankBookDTO);
+		modelAndView.setViewName("redirect:bankbookList");
+		
 		return modelAndView;
 		
 	}
-    
-   
-    
+     
     
 	//상품수정
 	@RequestMapping(value= "/bankbook/bankbookUpdate")

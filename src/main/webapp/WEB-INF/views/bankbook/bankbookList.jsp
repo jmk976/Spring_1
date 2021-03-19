@@ -73,7 +73,7 @@
 	       </table>
 	       
 	       
-	       <a href ="./bankbookWrite.do" class="btn btn-danger">WRITE</a>
+	       <a href ="./bankbookAdd" class="btn btn-danger">WRITE</a>
 	       
 	       
 	    </div>
