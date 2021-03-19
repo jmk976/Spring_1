@@ -1,10 +1,5 @@
-<%@page import="com.iu.s1.member.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-   <% 
-   MemberDTO memberDTO  = (MemberDTO)request.getAttribute("dto");
-   %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,9 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>Member Page</h1>
-	
-	<h1><%= memberDTO.getEmail() %></h1>
-
+	<h1>BankBook Update Page</h1>
 </body>
 </html>

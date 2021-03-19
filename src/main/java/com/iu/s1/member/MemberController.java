@@ -4,9 +4,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class MemberController {
@@ -16,12 +16,11 @@ public class MemberController {
 	
 	//memberJoin print  //   /member/memberLogin
 	
-	@RequestMapping(value="/member/memberLogin")
-	public String memberJoin() {
-		System.out.println("로그인 하시오");
-		//WEB-INF/views/memberLogin.jsp
+	@RequestMapping(value="/member/memberJoin")
+	public void memberJoin() {
 		
-		return "member/memberLogin";
+		
+		//return "member/memberJoin";
 	}
 	
 	
@@ -30,11 +29,9 @@ public class MemberController {
 		public void memberJoin(MemberDTO memberDTO)throws Exception{
 			
 			int result = memberService.memberJoin(memberDTO);
-			
+			System.out.println("test");
 			System.out.println(result);
-			
-		 
-			  
+		
 		}
 		
 		
@@ -52,16 +49,19 @@ public class MemberController {
 			return "member/memberLogin";
 		}
 		
-		
 		//memberLogin2 print
 		@RequestMapping(value = "/member/memberLogin", method = RequestMethod.POST)
-		public String memberLogin(MemberDTO memberDTO, ModelAndView modelAndView ) throws Exception {
+		public String memberLogin(HttpServletRequest request, Model Model) throws Exception {
+			String id = request.getParameter("id");
+			String pw = request.getParameter("pw");
 			
-			
+			MemberDTO memberDTO = new MemberDTO();
+			memberDTO.setId(id);
+			memberDTO.setPw(pw);
 			memberDTO = memberService.memberLogin(memberDTO);
 			
-			modelAndView.addObject("dto", memberDTO);
-			modelAndView.setViewName("member/memberPage");
+			System.out.println(memberDTO);
+			request.setAttribute("dto", memberDTO);
 			
 			
 			 return "member/memberPage";
