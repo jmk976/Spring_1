@@ -3,11 +3,13 @@ package com.iu.s1.bankbook;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+@Controller
 public class BankBookController {
 	
 	@Autowired
@@ -26,12 +28,12 @@ public class BankBookController {
   //상품 상세 정보 출력
   	@RequestMapping(value= "/bankbook/bankbookSelect")
     	public ModelAndView bankbookSelect (BankBookDTO bankBookDTO, ModelAndView modelAndView) throws Exception{
+  		bankBookDTO = bankbookService.getSelect(bankBookDTO);
   		
+  		modelAndView.addObject("dto", bankBookDTO);
   		modelAndView.setViewName("bankbook/bankbookSelect");
-  		
-  		
+  
   		return modelAndView;
-    		
     	}
 	
 	

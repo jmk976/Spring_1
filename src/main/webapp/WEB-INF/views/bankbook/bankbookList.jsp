@@ -1,12 +1,7 @@
-<%@page import="com.iu.s1.bankbook.BankBookDTO"%>
-<%@page import="java.util.List"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-     <%
-   List<BankBookDTO> ar = (List<BankBookDTO>)request.getAttribute("list");
-    
-    %>
+    pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,14 +58,17 @@
 	       	
 	       	
 	       	<tbody>
-	       	<% for(int i=0;i<ar.size();i++){ %>
+	       	
+	             <!-- 반복 시작 -->
+	       	     <c:forEach items="${list}" var="dto">
 	       		<tr>
-	       			<td><a href="./bankbookSelect.do?booknumber=<%= ar.get(i).getBooknumber()%>"><%=ar.get(i).getBookname() %></a></td>
-	       			<td><%=ar.get(i).getBookrate() %></td>
-	       			<td><%=ar.get(i).getBooksale() %></td>
+	       			<td><a href="./bankbookSelect?booknumber=${dto.booknumber}" >${dto.bookname}</a></td>
+	       			<td>${dto.bookrate}</td>
+	       			<td>${dto.booksale}</td>
 	       		</tr>
 	       		
-	      	<% } %>
+				<!-- 반복  끝-->
+				</c:forEach>
 	       	</tbody>
 	       </table>
 	       

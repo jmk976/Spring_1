@@ -45,7 +45,7 @@ public int setWrite(BankBookDTO bankBookDTO) throws Exception{
 }
 	
 	
-public BankBookDTO getSelect(long bookNumber) throws Exception{
+public BankBookDTO getSelect(BankBookDTO bankBookDTO) throws Exception{
 	String user="user01";
 	String password="user01";
 	String url="jdbc:oracle:thin:@127.0.0.1:1521:xe";
@@ -60,11 +60,11 @@ public BankBookDTO getSelect(long bookNumber) throws Exception{
 	
 	PreparedStatement st = con.prepareStatement(sql);
 	
-	st.setLong(1, bookNumber);
+	st.setLong(1, bankBookDTO.getBooknumber());
 	
 	ResultSet rs = st.executeQuery();
 	
-	BankBookDTO bankBookDTO = null;
+	
 	
     if(rs.next()) {
     	bankBookDTO = new BankBookDTO();
@@ -72,6 +72,8 @@ public BankBookDTO getSelect(long bookNumber) throws Exception{
     	bankBookDTO.setBookname(rs.getString("bookname"));
     	bankBookDTO.setBookrate(rs.getDouble("bookrate"));
     	bankBookDTO.setBooksale(rs.getString("booksale"));	
+    } else {
+    	bankBookDTO=null;
     }
     
     rs.close();
