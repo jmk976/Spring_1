@@ -23,13 +23,17 @@ public class MemberController {
 		return "member/memberLogin";
 	}
 	
+	
 	// memberJoin2 //	/member/memberJoin POST
 		@RequestMapping(value = "/member/memberJoin", method = RequestMethod.POST)
-		public void memberJoin2(MemberDTO memberDTO)throws Exception{
+		public void memberJoin(MemberDTO memberDTO)throws Exception{
 			
 			int result = memberService.memberJoin(memberDTO);
 			
 			System.out.println(result);
+			
+		 
+			  
 		}
 		
 		
@@ -49,7 +53,7 @@ public class MemberController {
 		
 		//memberLogin2 print
 		@RequestMapping(value = "/member/memberLogin", method = RequestMethod.POST)
-		public void memberLogin2(HttpServletRequest request) throws Exception {
+		public String memberLogin(HttpServletRequest request) throws Exception {
 			String id = request.getParameter("id");
 			String pw = request.getParameter("pw");
 			
@@ -59,6 +63,11 @@ public class MemberController {
 			memberDTO = memberService.memberLogin(memberDTO);
 			
 			System.out.println(memberDTO);
+			request.setAttribute(pw, memberDTO);
+			
+			
+			 return "member/memberPage";
+			   
 			
 		}
 
